@@ -6,18 +6,27 @@
 <title>Birthday Surprise ❤️</title>
 
 <link rel="stylesheet" href="style.css">
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
 
 <body>
 
 <div class="bg-hearts"></div>
 
+<!-- Music Control -->
+<div class="music-control">
+<button id="musicToggle" title="Toggle Music">🎵</button>
+<audio id="bgMusic" loop>
+<source src="https://assets.mixkit.co/active_storage/sfx/2861/2861-preview.mp3" type="audio/mpeg">
+</audio>
+</div>
+
 <div class="birthday-card">
 
 <div class="cake">
-<img src="../assets/images/cake.png" id="cakeImg">
+<!-- Using emoji cake instead of missing image -->
+<div id="cakeEmoji" class="cake-emoji">🎂</div>
 </div>
 
 <h1 id="title"></h1>
@@ -34,10 +43,12 @@ and your heart always stay full of happiness.
 Happy Birthday Rakshu ❤️
 </p>
 
-<button id="nextBtn">
+<button id="nextBtn" class="glow-button">
 ✨ Start the Celebration 🎈
 </button>
 
 </div>
+
+<script src="script.js"></script>
 </body>
 </html>
