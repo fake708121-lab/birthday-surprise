@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Letter ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ffd6e7,#fff7fb);
+overflow:hidden;
+}
+
+.card{
+width:360px;
+background:white;
+padding:30px;
+border-radius:25px;
+box-shadow:0 20px 40px rgba(255,105,180,.25);
+text-align:center;
+z-index:10;
+}
+
+.envelope{
+font-size:90px;
+cursor:pointer;
+transition:.4s;
+}
+
+.envelope:hover{
+transform:scale(1.1);
+}
+
+#letter{
+display:none;
+margin-top:20px;
+text-align:left;
+font-size:16px;
+line-height:1.8;
+color:#444;
+min-height:220px;
+white-space:pre-wrap;
+}
+
+button{
+display:none;
+margin-top:25px;
+padding:14px 28px;
+border:none;
+border-radius:50px;
+background:#ff4f8b;
+color:white;
+font-size:18px;
+cursor:pointer;
+}
+
+.heart{
+position:absolute;
+color:#ff4f8b;
+font-size:24px;
+animation:fall linear infinite;
+opacity:.6;
+}
+
+@keyframes fall{
+from{
+transform:translateY(-100px);
+}
+to{
+transform:translateY(110vh);
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="envelope" onclick="openLetter()">
+💌
+</div>
+
+<h2>Tap the Envelope</h2>
+
+<div id="letter"></div>
+
+<button id="giftBtn" onclick="location.href='gift.html'">
+Open Your Gift 🎁
+</button>
+
+</div>
+
+<script>
+
+const text=`Happy Birthday ❤️
+
+Today is not just your birthday...
+
+It is the day the world became more beautiful because you came into it.
+
+Thank you for your smile, your kindness and every beautiful memory.
+
+I wish your dreams come true and happiness follows you forever.
+
+Happy Birthday, My Love. ❤️`;
+
+let i=0;
+
+function openLetter(){
+
+document.querySelector(".envelope").style.display="none";
+
+document.querySelector("h2").style.display="none";
+
+document.getElementById("letter").style.display="block";
+
+type();
+
+}
+
+function type(){
+
+if(i<text.length){
+
+document.getElementById("letter").innerHTML+=text.charAt(i);
+
+i++;
+
+setTimeout(type,40);
+
+}else{
+
+document.getElementById("giftBtn").style.display="inline-block";
+
+}
+
+}
+
+function createHeart(){
+
+const h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML="❤";
+
+h.style.left=Math.random()*100+"vw";
+
+h.style.animationDuration=(4+Math.random()*4)+"s";
+
+document.body.appendChild(h);
+
+setTimeout(()=>h.remove(),8000);
+
+}
+
+setInterval(createHeart,350);
+
+</script>
+
+</body>
+</html>
