@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pop the Balloons 🎈</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+body{
+margin:0;
+overflow:hidden;
+background:linear-gradient(180deg,#ffd6e7,#ffeef5);
+font-family:Poppins,sans-serif;
+}
+
+h1{
+position:absolute;
+top:20px;
+width:100%;
+text-align:center;
+color:#ff2d75;
+z-index:100;
+}
+
+#count{
+position:absolute;
+top:70px;
+width:100%;
+text-align:center;
+font-size:22px;
+font-weight:bold;
+color:#d81b60;
+z-index:100;
+}
+
+.balloon{
+
+position:absolute;
+bottom:-150px;
+
+width:70px;
+height:90px;
+
+border-radius:50% 50% 45% 45%;
+
+cursor:pointer;
+
+animation:float linear forwards;
+
+}
+
+.balloon::after{
+
+content:"";
+
+position:absolute;
+
+width:2px;
+height:60px;
+
+background:#555;
+
+left:34px;
+top:90px;
+
+}
+
+@keyframes float{
+
+from{
+transform:translateY(0);
+}
+
+to{
+transform:translateY(-120vh);
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🎈 Pop All Balloons 🎈</h1>
+
+<div id="count">
+0 / 20
+</div>
+
+<script>
+
+let popped=0;
+
+const colors=[
+"#ff4f8b",
+"#ff6fa6",
+"#ff99bb",
+"#ff2d75",
+"#ff4081"
+];
+
+for(let i=0;i<20;i++){
+
+const b=document.createElement("div");
+
+b.className="balloon";
+
+b.style.background=colors[Math.floor(Math.random()*colors.length)];
+
+b.style.left=Math.random()*90+"%";
+
+b.style.animationDuration=(6+Math.random()*5)+"s";
+
+document.body.appendChild(b);
+
+b.onclick=function(){
+
+this.remove();
+
+popped++;
+
+document.getElementById("count").innerHTML=popped+" / 20";
+
+if(popped==20){
+
+alert("🎉 Amazing! Let's cut the cake!");
+
+window.location="candle.html";
+
+}
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
