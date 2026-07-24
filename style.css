@@ -137,3 +137,39 @@ transform:scale(1);
 }
 
 }
+body{
+transition:1s;
+}
+
+#typing{
+
+color:#ff2d75;
+
+font-size:34px;
+
+min-height:100px;
+
+}
+
+#startBtn{
+
+animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.08);
+box-shadow:0 0 30px #ff4f8b;
+}
+
+100%{
+transform:scale(1);
+}
+
+}
