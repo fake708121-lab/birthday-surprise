@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blow the Candle 🕯️</title>
+
+<style>
+body{
+margin:0;
+font-family:Poppins,sans-serif;
+background:linear-gradient(#ffd6e7,#fff3f8);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
+}
+
+.card{
+text-align:center;
+background:white;
+padding:30px;
+border-radius:25px;
+box-shadow:0 15px 40px rgba(255,105,180,.25);
+width:330px;
+}
+
+.cake{
+font-size:120px;
+margin:20px 0;
+transition:.5s;
+}
+
+button{
+padding:15px 30px;
+border:none;
+border-radius:40px;
+background:#ff4f8b;
+color:white;
+font-size:18px;
+cursor:pointer;
+}
+
+h2{
+color:#ff2d75;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>🎂 Blow the Candle</h2>
+
+<div id="cake" class="cake">🕯️🎂</div>
+
+<p>Tap the button and blow into your microphone.</p>
+
+<button onclick="startMic()">Start Microphone</button>
+
+</div>
+
+<script>
+
+async function startMic(){
+
+const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+
+const audioContext=new AudioContext();
+
+const mic=audioContext.createMediaStreamSource(stream);
+
+const analyser=audioContext.createAnalyser();
+
+mic.connect(analyser);
+
+const data=new Uint8Array(analyser.frequencyBinCount);
+
+function detect(){
+
+analyser.getByteFrequencyData(data);
+
+let volume=data.reduce((a,b)=>a+b)/data.length;
+
+if(volume>40){
+
+document.getElementById("cake").innerHTML="💨🎂";
+
+setTimeout(()=>{
+
+alert("🎉 Wish Granted!");
+
+window.location="bouquet.html";
+
+},1500);
+
+}
+
+requestAnimationFrame(detect);
+
+}
+
+detect();
+
+}
+
+</script>
+
+</body>
+</html>
