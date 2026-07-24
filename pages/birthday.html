@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Happy Birthday ❤️</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="hearts"></div>
+
+<div class="birthday-card">
+
+<h1>🎂 Happy Birthday 🎂</h1>
+
+<h2 id="name">My Love ❤️</h2>
+
+<p>
+Today is all about celebrating your beautiful smile, your kind heart, and every wonderful moment you bring into my life.
+</p>
+
+<button id="next">
+Continue ➜
+</button>
+
+</div>
+
+<script>
+
+confetti({
+particleCount:250,
+spread:180,
+origin:{y:.6}
+});
+
+document.getElementById("next").onclick=function(){
+
+window.location="balloons.html";
+
+}
+
+</script>
+
+</body>
+</html>
