@@ -3,150 +3,186 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Gift 🎁</title>
+<title>Gift 🎁</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-background:linear-gradient(135deg,#ffd6e7,#ffcce0,#ffe2ec,#fff5fb);
-background-size: 400% 400%;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-overflow:hidden;
-text-align:center;
-animation: bgShift 12s ease infinite;
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #0a0a1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Fredoka', sans-serif;
+  overflow: hidden;
 }
 
-@keyframes bgShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.phone-screen {
+  width: 400px;
+  height: 800px;
+  background: linear-gradient(135deg, #fad0d7, #ffc7d9);
+  border-radius: 50px;
+  padding: 12px;
+  box-shadow: 0 20px 60px rgba(255, 79, 139, 0.4), 0 0 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
-.card{
-background:rgba(255, 255, 255, 0.4);
-backdrop-filter: blur(20px);
-padding:50px;
-border-radius:30px;
-box-shadow:0 20px 60px rgba(255,105,180,.3);
-width:400px;
-z-index:5;
-border: 2px solid rgba(255, 255, 255, 0.6);
-animation: slideUp 0.8s ease;
+.notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 25px;
+  background: #fad0d7;
+  border-radius: 0 0 25px 25px;
+  z-index: 100;
 }
 
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(50px); }
-  to { opacity: 1; transform: translateY(0); }
+.screen-content {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #ffd6e7, #ffe2ec, #fff5f9);
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
 }
 
-#gift{
-font-size:140px;
-cursor:pointer;
-animation:float 1.5s ease-in-out infinite;
-margin: 20px 0;
-display: inline-block;
+.content-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.card {
+  width: 85%;
+  height: 70%;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  box-shadow: 0 15px 40px rgba(255, 105, 180, 0.25);
+  animation: slide-up 0.8s ease;
+  text-align: center;
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#gift {
+  font-size: 130px;
+  cursor: pointer;
+  animation: float 1.5s ease-in-out infinite;
+  margin: 20px 0;
+  display: block;
 }
 
 @keyframes float {
-  0%,100%{transform:translateY(0) scale(1);}
-  50%{transform:translateY(-20px) scale(1.1);}
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-15px) scale(1.1); }
 }
 
-#surprise{
-display:none;
-animation:fade .8s;
+#surprise {
+  display: none;
+  width: 100%;
+  animation: fade-in 0.8s ease;
 }
 
-@keyframes fade {
-  from{ opacity:0; transform:scale(.8); }
-  to{ opacity:1; transform:scale(1); }
+@keyframes fade-in {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-#photo{
-width:200px;
-height:200px;
-border-radius:50%;
-object-fit:cover;
-border:6px solid #ff4f8b;
-margin:25px auto;
-display:block;
-box-shadow: 0 10px 30px rgba(255, 79, 139, 0.3);
+#photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid #ff4f8b;
+  margin: 20px auto;
+  display: block;
+  box-shadow: 0 10px 30px rgba(255, 79, 139, 0.3);
 }
 
-h1{
-color:#ff2d75;
-font-size: 44px;
-font-weight: 800;
-margin: 25px 0;
-background: linear-gradient(135deg, #ff2d75, #ff6fa6);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
+h1 {
+  color: #ff4f8b;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 20px 0;
+  font-style: italic;
 }
 
-p{
-margin-top:20px;
-line-height:1.9;
-color:#555;
-font-size: 17px;
+p {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 10px 0;
 }
 
 </style>
 </head>
+
 <body>
 
-<div class="card">
-
-<div id="gift" onclick="openGift()">
-🎁
-</div>
-
-<div id="surprise">
-
-<img id="photo" src="../assets/images/photo.jpg">
-
-<h1>Happy Birthday ❤️</h1>
-
-<p>
-May every dream of yours come true.
-<br><br>
-May your smile always shine brighter than the stars.
-<br><br>
-Thank you for being the most beautiful part of my life.
-<br><br>
-🎂❤️🎉
-</p>
-
-</div>
-
+<div class="phone-screen">
+  <div class="notch"></div>
+  <div class="screen-content">
+    <div class="content-container">
+      <div class="card">
+        <div id="gift" onclick="openGift()">🎁</div>
+        <div id="surprise">
+          <img id="photo" src="../assets/images/photo.jpg" alt="Birthday Gift">
+          <h1>Happy Birthday ❤️</h1>
+          <p>May every dream of yours come true.</p>
+          <p>May your smile always shine brighter than the stars.</p>
+          <p>Thank you for being the most beautiful part of my life.</p>
+          <p>🎂❤️🎉</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
-
 function openGift(){
   document.getElementById("gift").style.display="none";
   document.getElementById("surprise").style.display="block";
   confetti({
-    particleCount:400,
+    particleCount:500,
     spread:200,
-    origin:{y:.6}
+    origin:{y:.5}
   });
 }
-
 </script>
-
 </body>
 </html>

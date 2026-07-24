@@ -3,166 +3,192 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pop the Balloons 🎈</title>
+<title>Pop Balloons 🎈</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-body{
-margin:0;
-overflow:hidden;
-background:linear-gradient(180deg,#ffd6e7,#ffeef5,#ffe2ec);
-font-family:'Poppins',sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-h1{
-position:absolute;
-top:30px;
-width:100%;
-text-align:center;
-color:#ff2d75;
-z-index:100;
-font-size:42px;
-font-weight:800;
-letter-spacing:2px;
-text-shadow: 0 3px 10px rgba(255, 79, 139, 0.3);
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #0a0a1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Fredoka', sans-serif;
+  overflow: hidden;
 }
 
-#count{
-position:absolute;
-top:90px;
-width:100%;
-text-align:center;
-font-size:26px;
-font-weight:700;
-color:#d81b60;
-z-index:100;
-background: rgba(255, 255, 255, 0.5);
-padding: 10px;
-border-radius: 50px;
-width: 150px;
-left: 50%;
-transform: translateX(-50%);
-backdrop-filter: blur(10px);
-box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
+.phone-screen {
+  width: 400px;
+  height: 800px;
+  background: linear-gradient(135deg, #fad0d7, #ffc7d9);
+  border-radius: 50px;
+  padding: 12px;
+  box-shadow: 0 20px 60px rgba(255, 79, 139, 0.4), 0 0 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
-.balloon{
-position:absolute;
-bottom:-120px;
-width:75px;
-height:95px;
-border-radius:50% 50% 45% 45%;
-cursor:pointer;
-animation:float linear forwards;
-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-transition: transform 0.2s ease;
+.notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 25px;
+  background: #fad0d7;
+  border-radius: 0 0 25px 25px;
+  z-index: 100;
 }
 
-.balloon:hover{
-transform: scale(1.1);
+.screen-content {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #ffd6e7 0%, #ffe2ec 50%, #fff5f9 100%);
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
 }
 
-.balloon::after{
-content:"";
-position:absolute;
-width:2px;
-height:65px;
-background:#555;
-left:36.5px;
-top:95px;
-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+.header {
+  position: absolute;
+  top: 30px;
+  text-align: center;
+  z-index: 10;
 }
 
-@keyframes float{
-from{
-transform:translateY(0);
-}
-to{
-transform:translateY(-140vh);
-}
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ff4f8b;
+  margin-bottom: 10px;
 }
 
-/* Pop animation */
+.progress {
+  font-size: 16px;
+  color: #d81b60;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 8px 20px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.balloons-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 150px 30px 50px;
+}
+
+.balloon {
+  width: 90px;
+  height: 120px;
+  border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+  cursor: pointer;
+  position: relative;
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.15));
+  transition: transform 0.2s ease;
+  animation: float-up 3s ease-in infinite;
+}
+
+.balloon:hover {
+  transform: scale(1.1);
+}
+
+.balloon::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 50px;
+  background: #333;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@keyframes float-up {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+.balloon.pink { background: linear-gradient(135deg, #ff4f8b 0%, #ff8fb3 100%); }
+.balloon.green { background: linear-gradient(135deg, #7ec7e8 0%, #a8e6b8 100%); }
+.balloon.purple { background: linear-gradient(135deg, #c9b8ff 0%, #e8b4ff 100%); }
+.balloon.yellow { background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); }
+
+.balloon.pop {
+  animation: pop 0.4s ease;
+}
+
 @keyframes pop {
-0% { transform: scale(1); }
-100% { transform: scale(0); opacity: 0; }
-}
-
-.balloon.popped {
-animation: pop 0.3s ease;
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0) rotate(360deg); opacity: 0; }
 }
 
 </style>
-
 </head>
 
 <body>
 
-<h1>🎈 Pop All Balloons 🎈</h1>
-
-<div id="count">
-0 / 20
+<div class="phone-screen">
+  <div class="notch"></div>
+  <div class="screen-content">
+    <div class="header">
+      <div class="title">🎈 Pop Balloons 🎈</div>
+      <div class="progress"><span id="popped">0</span> / 4 POPPED</div>
+    </div>
+    
+    <div class="balloons-container" id="balloonsContainer"></div>
+  </div>
 </div>
 
 <script>
-
 let popped = 0;
-const total = 20;
+const total = 4;
+const colors = ['pink', 'green', 'purple', 'yellow'];
 
-const colors = [
-"#ff4f8b",
-"#ff6fa6",
-"#ff99bb",
-"#ff2d75",
-"#ff4081",
-"#ff85a8"
-];
-
-function createBalloon(){
-
-if(popped >= total) return;
-
-const b = document.createElement("div");
-b.className = "balloon";
-b.style.background = colors[Math.floor(Math.random()*colors.length)];
-b.style.left = Math.random()*85 + "%";
-b.style.animationDuration = (12 + Math.random()*8) + "s";
-
-document.body.appendChild(b);
-
-b.onclick = function(e){
-e.stopPropagation();
-if(this.classList.contains('popped')) return;
-this.classList.add('popped');
-
-popped++;
-document.getElementById("count").innerHTML = popped + " / " + total;
-
-if(popped < total){
-setTimeout(() => createBalloon(), 200);
-}else{
-setTimeout(()=>{
-window.location.href="candle.html";
-},1500);
-}
-};
-
-b.addEventListener("animationend",()=>{
-if(document.body.contains(b)){
-b.remove();
-if(popped < total) createBalloon();
-}
-});
-
+function createBalloon(color) {
+  const container = document.getElementById('balloonsContainer');
+  const balloon = document.createElement('div');
+  balloon.className = `balloon ${color}`;
+  
+  balloon.onclick = function() {
+    if (this.classList.contains('pop')) return;
+    this.classList.add('pop');
+    popped++;
+    document.getElementById('popped').textContent = popped;
+    
+    if (popped >= total) {
+      setTimeout(() => {
+        window.location.href = 'candle.html';
+      }, 1000);
+    }
+  };
+  
+  container.appendChild(balloon);
 }
 
-for(let i=0;i<6;i++){
-createBalloon();
-}
-
+// Create balloons
+colors.forEach(color => createBalloon(color));
 </script>
-
 </body>
 </html>

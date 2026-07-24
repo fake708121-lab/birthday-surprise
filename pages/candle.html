@@ -3,106 +3,164 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blow the Candle 🕯️</title>
+<title>Blow Candle 🕯️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 <style>
 
-body{
-margin:0;
-font-family:'Poppins',sans-serif;
-background:linear-gradient(135deg, #ffd6e7, #fff5fb, #ffe2ec);
-background-size: 400% 400%;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-overflow:hidden;
-animation: bgShift 12s ease infinite;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@keyframes bgShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #0a0a1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Fredoka', sans-serif;
+  overflow: hidden;
 }
 
-.card{
-text-align:center;
-background:rgba(255, 255, 255, 0.4);
-backdrop-filter: blur(20px);
-padding:50px;
-border-radius:30px;
-box-shadow:0 20px 60px rgba(255,105,180,.3);
-width:380px;
-border: 2px solid rgba(255, 255, 255, 0.6);
-animation: slideUp 0.8s ease;
+.phone-screen {
+  width: 400px;
+  height: 800px;
+  background: linear-gradient(135deg, #fad0d7, #ffc7d9);
+  border-radius: 50px;
+  padding: 12px;
+  box-shadow: 0 20px 60px rgba(255, 79, 139, 0.4), 0 0 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(50px); }
-  to { opacity: 1; transform: translateY(0); }
+.notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 25px;
+  background: #fad0d7;
+  border-radius: 0 0 25px 25px;
+  z-index: 100;
 }
 
-.cake{
-font-size:130px;
-margin:25px 0;
-animation:flicker 0.5s ease-in-out infinite;
+.screen-content {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #ffd6e7, #ffe2ec, #fff5f9);
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.content-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.card {
+  width: 85%;
+  height: 70%;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  box-shadow: 0 15px 40px rgba(255, 105, 180, 0.25);
+  animation: slide-up 0.8s ease;
+  text-align: center;
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  color: #ff4f8b;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 15px 0;
+}
+
+.candle {
+  font-size: 100px;
+  margin: 20px 0;
+  animation: flicker 0.5s ease-in-out infinite;
 }
 
 @keyframes flicker {
-  0%, 100% { text-shadow: 0 5px 20px rgba(255, 200, 0, 0.5); }
-  50% { text-shadow: 0 5px 40px rgba(255, 150, 0, 0.8); }
+  0%, 100% { text-shadow: 0 5px 20px rgba(255, 200, 0, 0.6); }
+  50% { text-shadow: 0 5px 40px rgba(255, 150, 0, 0.9); }
 }
 
-h2{
-color:#ff2d75;
-font-size: 36px;
-font-weight: 800;
-margin-bottom: 20px;
+p {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 15px 0;
 }
 
-p{
-color:#555;
-font-size: 17px;
-line-height: 1.7;
-margin: 15px 0;
-}
-
-button{
-padding:16px 35px;
-border:none;
-border-radius:50px;
-background:linear-gradient(135deg, #ff4f8b, #ff8fb3);
-color:white;
-font-size:17px;
-font-weight: 700;
-cursor:pointer;
-margin-top: 25px;
-box-shadow: 0 10px 30px rgba(255, 79, 139, 0.5);
-transition: all 0.3s ease;
+button {
+  margin-top: 25px;
+  padding: 14px 35px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #ff4f8b, #ff8fb3);
+  color: white;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(255, 79, 139, 0.4);
+  transition: all 0.3s ease;
+  font-family: 'Fredoka', sans-serif;
 }
 
 button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 15px 40px rgba(255, 79, 139, 0.8);
+  transform: scale(1.08);
+  box-shadow: 0 12px 30px rgba(255, 79, 139, 0.6);
 }
 
 </style>
-
 </head>
+
 <body>
 
-<div class="card">
-<h2>🎂 Make a Wish</h2>
-
-<div class="cake">🕯️</div>
-
-<p>Click the button and blow air into your microphone to blow out the candle!</p>
-
-<button onclick="startMic()">🎤 Blow the Candle</button>
+<div class="phone-screen">
+  <div class="notch"></div>
+  <div class="screen-content">
+    <div class="content-container">
+      <div class="card">
+        <h1>🎂 Make a Wish</h1>
+        <div class="candle">🕯️</div>
+        <p>Click the button and blow air into your microphone to blow out the candle!</p>
+        <button onclick="startMic()">🎤 Blow the Candle</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -129,9 +187,9 @@ async function startMic(){
         });
         
         document.querySelector(".card").innerHTML = `
-          <h1 style="color:#ff2d75; font-size: 50px; font-weight: 800; margin: 30px 0;">🎉 Wish Granted! 🎉</h1>
-          <div style="font-size:120px; margin: 20px 0;">✨💨🎂</div>
-          <p style="font-size: 19px; font-weight: 600; color: #ff2d75;">Your birthday wish has been sent to the stars!</p>
+          <h1>🎉 Wish Granted! 🎉</h1>
+          <div style="font-size:80px; margin: 20px 0;">💨🎂</div>
+          <p style="font-size: 18px; font-weight: 600; color: #ff4f8b;">Your birthday wish has been sent to the stars!</p>
         `;
         
         setTimeout(() => {
@@ -147,6 +205,5 @@ async function startMic(){
   }
 }
 </script>
-
 </body>
 </html>

@@ -3,60 +3,66 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Birthday Surprise ❤️</title>
+<title>Birthday Surprise For Rakshu ❤️</title>
 
 <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 
 <body>
 
-<div class="bg-hearts"></div>
-<div class="floating-elements">
-  <div class="float-item">🎂</div>
-  <div class="float-item">❤️</div>
-  <div class="float-item">🎉</div>
-  <div class="float-item">✨</div>
-</div>
+<div class="phone-screen">
+  <div class="notch"></div>
+  
+  <div class="screen-content">
+    <!-- Floating particles -->
+    <div class="floating-hearts">
+      <span>💕</span>
+      <span>💕</span>
+      <span>💕</span>
+      <span>💕</span>
+      <span>💕</span>
+    </div>
 
-<!-- Music Control -->
-<div class="music-control">
-<button id="musicToggle" title="Toggle Music">🎵</button>
-<audio id="bgMusic" loop crossorigin="anonymous">
-<source src="https://assets.mixkit.co/active_storage/sfx/2455/2455-preview.mp3" type="audio/mpeg">
-</audio>
-</div>
+    <div class="music-control">
+      <button id="musicToggle" title="Toggle Music">🎵</button>
+      <audio id="bgMusic" loop crossorigin="anonymous">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2455/2455-preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
 
-<div class="birthday-card premium">
+    <div class="content-container">
+      <div class="card-container">
+        <div class="card loading-card" id="loadingCard">
+          <div class="card-name">Rakshu ❤️</div>
+          <div class="heart-qr-container">
+            <svg class="heart-shape" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path d="M50,85 C20,70 10,55 10,40 C10,25 20,15 32,15 C40,15 47,20 50,28 C53,20 60,15 68,15 C80,15 90,25 90,40 C90,55 80,70 50,85 Z" fill="#ff4f8b" />
+            </svg>
+            <div id="qrcode" class="qr-code"></div>
+          </div>
+          <div class="opening-text">Opening...</div>
+        </div>
 
-<div class="cake-container">
-<!-- Animated cake emoji -->
-<div id="cakeEmoji" class="cake-emoji">🎂</div>
-</div>
-
-<div class="content">
-<h1 id="title" class="title-animate"></h1>
-
-<p id="message" class="message-text">
-Today is not just another day...<br><br>
-
-It's the day someone incredibly special came into this world.
-
-<br><br>
-May your smile never fade,
-your dreams always come true,
-and your heart always stay full of happiness.
-
-<br><br>
-<span class="highlight">Happy Birthday Rakshu ❤️</span>
-</p>
-
-<button id="nextBtn" class="glow-button premium-btn">
-✨ Start the Celebration 🎈
-</button>
-</div>
-
+        <div class="card hidden" id="contentCard">
+          <div class="card-heading">Happy Birthday, Rakshu ❤️</div>
+          <div class="cute-illustration">
+            <div class="character bear">🧸</div>
+            <div class="character bunny">🐰</div>
+            <div class="cake-deco">🎂</div>
+            <div class="bunting">🎉</div>
+          </div>
+          <div class="question-text">Are you excited for what's next?</div>
+          <div class="button-group">
+            <button class="btn btn-no" id="noBtn">No</button>
+            <button class="btn btn-yes" id="yesBtn">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script src="script.js"></script>
