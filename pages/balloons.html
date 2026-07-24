@@ -39,7 +39,7 @@ z-index:100;
 .balloon{
 
 position:absolute;
-bottom:-150px;
+bottom:-120px;
 
 width:70px;
 height:90px;
@@ -75,7 +75,7 @@ transform:translateY(0);
 }
 
 to{
-transform:translateY(-120vh);
+transform:translateY(-140vh);
 }
 
 }
@@ -94,9 +94,10 @@ transform:translateY(-120vh);
 
 <script>
 
-let popped=0;
+let popped = 0;
+const total = 20;
 
-const colors=[
+const colors = [
 "#ff4f8b",
 "#ff6fa6",
 "#ff99bb",
@@ -104,38 +105,56 @@ const colors=[
 "#ff4081"
 ];
 
-for(let i=0;i<20;i++){
+function createBalloon(){
 
-const b=document.createElement("div");
+if(popped >= total) return;
 
-b.className="balloon";
+const b = document.createElement("div");
 
-b.style.background=colors[Math.floor(Math.random()*colors.length)];
+b.className = "balloon";
 
-b.style.left=Math.random()*90+"%";
+b.style.background = colors[Math.floor(Math.random()*colors.length)];
 
-b.style.animationDuration=(6+Math.random()*5)+"s";
+b.style.left = Math.random()*85 + "%";
+
+// Much slower movement
+b.style.animationDuration = (12 + Math.random()*8) + "s";
 
 document.body.appendChild(b);
 
-b.onclick=function(){
+b.onclick = function(){
 
 this.remove();
 
 popped++;
 
-document.getElementById("count").innerHTML=popped+" / 20";
+document.getElementById("count").innerHTML =
+popped + " / " + total;
 
-if(popped==20){
+// Create another balloon until all are popped
+if(popped < total){
+createBalloon();
+}else{
+setTimeout(()=>{
+window.location.href="candle.html";
+},1000);
+}
 
-alert("🎉 Amazing! Let's cut the cake!");
+};
 
-window.location="candle.html";
+// Remove balloon only if it escapes
+b.addEventListener("animationend",()=>{
+if(document.body.contains(b)){
+b.remove();
+createBalloon();
+}
+});
 
 }
 
-}
-
+// Show only 6 balloons at a time
+for(let i=0;i<6;i++){
+createBalloon();
 }
 
 </script>
