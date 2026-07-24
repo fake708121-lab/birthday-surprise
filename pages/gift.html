@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Your Gift 🎁</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 <style>
@@ -14,37 +14,55 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Poppins,sans-serif;
+font-family:'Poppins',sans-serif;
 }
 
 body{
-background:linear-gradient(135deg,#ffd6e7,#fff5fb);
+background:linear-gradient(135deg,#ffd6e7,#ffcce0,#ffe2ec,#fff5fb);
+background-size: 400% 400%;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
 overflow:hidden;
 text-align:center;
+animation: bgShift 12s ease infinite;
+}
+
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .card{
-background:white;
-padding:30px;
-border-radius:25px;
-box-shadow:0 20px 50px rgba(255,105,180,.25);
-width:360px;
+background:rgba(255, 255, 255, 0.4);
+backdrop-filter: blur(20px);
+padding:50px;
+border-radius:30px;
+box-shadow:0 20px 60px rgba(255,105,180,.3);
+width:400px;
 z-index:5;
+border: 2px solid rgba(255, 255, 255, 0.6);
+animation: slideUp 0.8s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 #gift{
-font-size:120px;
+font-size:140px;
 cursor:pointer;
-animation:bounce 1.5s infinite;
+animation:float 1.5s ease-in-out infinite;
+margin: 20px 0;
+display: inline-block;
 }
 
-@keyframes bounce{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-15px);}
+@keyframes float {
+  0%,100%{transform:translateY(0) scale(1);}
+  50%{transform:translateY(-20px) scale(1.1);}
 }
 
 #surprise{
@@ -52,40 +70,42 @@ display:none;
 animation:fade .8s;
 }
 
+@keyframes fade {
+  from{ opacity:0; transform:scale(.8); }
+  to{ opacity:1; transform:scale(1); }
+}
+
 #photo{
-width:180px;
-height:180px;
+width:200px;
+height:200px;
 border-radius:50%;
 object-fit:cover;
 border:6px solid #ff4f8b;
-margin:20px auto;
+margin:25px auto;
 display:block;
+box-shadow: 0 10px 30px rgba(255, 79, 139, 0.3);
 }
 
 h1{
 color:#ff2d75;
+font-size: 44px;
+font-weight: 800;
+margin: 25px 0;
+background: linear-gradient(135deg, #ff2d75, #ff6fa6);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
 }
 
 p{
-margin-top:15px;
-line-height:1.7;
+margin-top:20px;
+line-height:1.9;
 color:#555;
-}
-
-@keyframes fade{
-from{
-opacity:0;
-transform:scale(.8);
-}
-to{
-opacity:1;
-transform:scale(1);
-}
+font-size: 17px;
 }
 
 </style>
 </head>
-
 <body>
 
 <div class="card">
@@ -101,15 +121,13 @@ transform:scale(1);
 <h1>Happy Birthday ❤️</h1>
 
 <p>
-
 May every dream of yours come true.
-
+<br><br>
 May your smile always shine brighter than the stars.
-
+<br><br>
 Thank you for being the most beautiful part of my life.
-
+<br><br>
 🎂❤️🎉
-
 </p>
 
 </div>
@@ -119,17 +137,13 @@ Thank you for being the most beautiful part of my life.
 <script>
 
 function openGift(){
-
-document.getElementById("gift").style.display="none";
-
-document.getElementById("surprise").style.display="block";
-
-confetti({
-particleCount:350,
-spread:180,
-origin:{y:.6}
-});
-
+  document.getElementById("gift").style.display="none";
+  document.getElementById("surprise").style.display="block";
+  confetti({
+    particleCount:400,
+    spread:200,
+    origin:{y:.6}
+  });
 }
 
 </script>

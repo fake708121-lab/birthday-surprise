@@ -6,7 +6,7 @@ function type() {
   if (i < text.length) {
     document.getElementById("title").innerHTML += text.charAt(i);
     i++;
-    setTimeout(type, 90);
+    setTimeout(type, 80);
   }
 }
 
@@ -16,10 +16,13 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Confetti animation
   if (typeof confetti !== 'undefined') {
-    confetti({
-      particleCount: 250,
-      spread: 180
-    });
+    setTimeout(() => {
+      confetti({
+        particleCount: 300,
+        spread: 200,
+        origin: { y: 0.3 }
+      });
+    }, 500);
   }
 
   // Music Control
@@ -53,11 +56,15 @@ document.addEventListener('DOMContentLoaded', function() {
   const nextBtn = document.getElementById("nextBtn");
   if (nextBtn) {
     nextBtn.addEventListener("click", function() {
+      confetti({
+        particleCount: 200,
+        spread: 150
+      });
       document.body.style.opacity = "0";
-      document.body.style.transition = "opacity 0.5s ease";
+      document.body.style.transition = "opacity 0.6s ease";
       setTimeout(() => {
         window.location.href = "./pages/balloons.html";
-      }, 500);
+      }, 600);
     });
   }
 });

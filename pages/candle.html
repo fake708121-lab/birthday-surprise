@@ -5,112 +5,147 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blow the Candle 🕯️</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
 <style>
+
 body{
 margin:0;
-font-family:Poppins,sans-serif;
-background:linear-gradient(#ffd6e7,#fff3f8);
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg, #ffd6e7, #fff5fb, #ffe2ec);
+background-size: 400% 400%;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
 overflow:hidden;
+animation: bgShift 12s ease infinite;
+}
+
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .card{
 text-align:center;
-background:white;
-padding:30px;
-border-radius:25px;
-box-shadow:0 15px 40px rgba(255,105,180,.25);
-width:330px;
+background:rgba(255, 255, 255, 0.4);
+backdrop-filter: blur(20px);
+padding:50px;
+border-radius:30px;
+box-shadow:0 20px 60px rgba(255,105,180,.3);
+width:380px;
+border: 2px solid rgba(255, 255, 255, 0.6);
+animation: slideUp 0.8s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .cake{
-font-size:120px;
-margin:20px 0;
-transition:.5s;
+font-size:130px;
+margin:25px 0;
+animation:flicker 0.5s ease-in-out infinite;
 }
 
-button{
-padding:15px 30px;
-border:none;
-border-radius:40px;
-background:#ff4f8b;
-color:white;
-font-size:18px;
-cursor:pointer;
+@keyframes flicker {
+  0%, 100% { text-shadow: 0 5px 20px rgba(255, 200, 0, 0.5); }
+  50% { text-shadow: 0 5px 40px rgba(255, 150, 0, 0.8); }
 }
 
 h2{
 color:#ff2d75;
+font-size: 36px;
+font-weight: 800;
+margin-bottom: 20px;
 }
+
+p{
+color:#555;
+font-size: 17px;
+line-height: 1.7;
+margin: 15px 0;
+}
+
+button{
+padding:16px 35px;
+border:none;
+border-radius:50px;
+background:linear-gradient(135deg, #ff4f8b, #ff8fb3);
+color:white;
+font-size:17px;
+font-weight: 700;
+cursor:pointer;
+margin-top: 25px;
+box-shadow: 0 10px 30px rgba(255, 79, 139, 0.5);
+transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 15px 40px rgba(255, 79, 139, 0.8);
+}
+
 </style>
 
 </head>
-
 <body>
 
 <div class="card">
+<h2>🎂 Make a Wish</h2>
 
-<h2>🎂 Blow the Candle</h2>
+<div class="cake">🕯️</div>
 
-<div id="cake" class="cake">🕯️🎂</div>
+<p>Click the button and blow air into your microphone to blow out the candle!</p>
 
-<p>Tap the button and blow into your microphone.</p>
-
-<button onclick="startMic()">Start Microphone</button>
-
+<button onclick="startMic()">🎤 Blow the Candle</button>
 </div>
 
 <script>
-
 async function startMic(){
-
-const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-
-const audioContext=new AudioContext();
-
-const mic=audioContext.createMediaStreamSource(stream);
-
-const analyser=audioContext.createAnalyser();
-
-mic.connect(analyser);
-
-const data=new Uint8Array(analyser.frequencyBinCount);
-
-function detect(){
-
-analyser.getByteFrequencyData(data);
-
-let volume=data.reduce((a,b)=>a+b)/data.length;
-
-if(volume > 12){
-
-stream.getTracks().forEach(track => track.stop());
-
-document.querySelector(".card").innerHTML = `
-<h1 style="color:#ff2d75">🎉 Wish Granted! 🎉</h1>
-
-<div style="font-size:120px">💨🎂</div>
-
-<p>Your birthday wish has been sent to the stars ✨</p>
-
-`;
-
-confetti({
-particleCount:250,
-spread:180
-});
-
-setTimeout(() => {
-window.location.href="./bouquet.html";
-},2500);
-
-return;
-
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const mic = audioContext.createMediaStreamSource(stream);
+    const analyser = audioContext.createAnalyser();
+    mic.connect(analyser);
+    
+    const data = new Uint8Array(analyser.frequencyBinCount);
+    
+    function detect(){
+      analyser.getByteFrequencyData(data);
+      let volume = data.reduce((a,b)=>a+b)/data.length;
+      
+      if(volume > 12){
+        stream.getTracks().forEach(track => track.stop());
+        
+        confetti({
+          particleCount: 300,
+          spread: 200
+        });
+        
+        document.querySelector(".card").innerHTML = `
+          <h1 style="color:#ff2d75; font-size: 50px; font-weight: 800; margin: 30px 0;">🎉 Wish Granted! 🎉</h1>
+          <div style="font-size:120px; margin: 20px 0;">✨💨🎂</div>
+          <p style="font-size: 19px; font-weight: 600; color: #ff2d75;">Your birthday wish has been sent to the stars!</p>
+        `;
+        
+        setTimeout(() => {
+          window.location.href="./bouquet.html";
+        }, 2500);
+        return;
+      }
+      requestAnimationFrame(detect);
+    }
+    detect();
+  } catch(err) {
+    alert('Microphone access denied');
+  }
 }
-
 </script>
 
 </body>
